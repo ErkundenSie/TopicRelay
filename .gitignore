@@ -1,0 +1,9 @@
+# Generated deployment configuration
+wrangler.jsonc
+
+# Wrangler local state
+.wrangler/
+
+# Local development secrets
+.dev.vars
+.dev.vars.*
