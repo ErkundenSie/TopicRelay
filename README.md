@@ -54,14 +54,16 @@
 
 在 Cloudflare Workers Builds 的构建设置中配置：
 
-| 配置项             | 值                                          |
-| ------------------ | ------------------------------------------- |
-| 构建命令           | `node scripts/generate-wrangler-config.mjs` |
-| 部署命令           | `npx wrangler deploy`                       |
-| 非生产分支部署命令 | `npx wrangler versions upload`              |
-| 路径               | `/`                                         |
+| 配置项             | 值                                                     |
+| ------------------ | ------------------------------------------------------ |
+| 构建命令           | `node scripts/generate-wrangler-config.mjs`            |
+| 部署命令           | `npx wrangler deploy --config wrangler.jsonc`          |
+| 非生产分支部署命令 | `npx wrangler versions upload --config wrangler.jsonc` |
+| 路径               | `/`                                                    |
 
 构建脚本会从构建环境变量生成被 `.gitignore` 忽略的 `wrangler.jsonc`。其中的 `keep_vars: true` 会保留控制台中配置的运行时变量和密钥。
+
+构建命令必须在部署命令前执行，并且需要配置 `TOPIC_RELAY_WORKER_NAME`、`TOPIC_RELAY_D1_DATABASE_NAME` 和 `TOPIC_RELAY_D1_DATABASE_ID`。若日志中只出现 `npx wrangler deploy`，说明未执行配置生成脚本；此时 Wrangler 无法识别 `_worker.js` 入口，可能报出无法检测静态文件目录的错误。
 
 > 不要在仓库中手工创建或提交 `wrangler.jsonc`。
 
@@ -75,7 +77,7 @@ $env:TOPIC_RELAY_D1_DATABASE_NAME = "your-d1-database-name"
 $env:TOPIC_RELAY_D1_DATABASE_ID = "your-d1-database-id"
 
 node scripts/generate-wrangler-config.mjs
-npx wrangler deploy
+npx wrangler deploy --config wrangler.jsonc
 ```
 
 ## 注册 Webhook
