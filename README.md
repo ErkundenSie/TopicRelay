@@ -114,6 +114,10 @@ Invoke-WebRequest -Method POST -Headers $headers -Uri "https://example.workers.d
 - 只有后台群管理员可以回复用户、打开管理面板和执行重置命令。
 - Git 提交前使用不暴露个人邮箱的 Git 身份；不要导入旧项目的 `.git` 目录。
 
+## 参考项目
+
+- [iawooo/ctt（CFTeleTrans）](https://github.com/iawooo/ctt)：基于 Cloudflare Workers 和 D1 的 Telegram 消息转发分组对话机器人。本项目的用户私聊转发至后台论坛话题的实现思路参考了该项目。
+
 ## 许可证
 
 [MIT License](LICENSE)
